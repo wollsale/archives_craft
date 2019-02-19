@@ -1,0 +1,25 @@
+{# Items Slider #}
+<section class="site-block block-slider001">
+  {# <div class="regular-text">
+    <p>{{ entry.homeFinancingText|raw }}</p>
+  </div> #}
+
+  <div class="item-slider-containter">
+    {# <h2 class="items-slider-title">Financing</h2> #}
+    <div class="items-slider main-carousel" data-flickity='{ "cellAlign": "left", "contain": true, "groupCells": true, "wrapAround": true }' >
+      {% set slides = block.items.all() %}
+      {% for slide in slides %}
+        <article class="slide carousel-cell">
+          <h3 class="item-title">{{ slide.heading }}</h3>
+          <div class="content">
+            {{ slide.text }}
+            {% set image = slide.image.one() ?? false %}
+            {% if image %}
+              <img class="item-icon" src="{{ image.url({ mode: "fit", width: 50, height: 50 }) }}" alt="{{ image.title }}">
+            {% endif %}
+          </div>
+        </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>

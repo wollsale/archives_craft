@@ -1,0 +1,100 @@
+{# @var craft \craft\web\twig\variables\CraftVariable #}
+{% set pageClass = 'app-showsfeed' %}
+{% extends "_layouts/_layout.twig" %}
+
+{% block _inline_css %}
+  <style>
+    {{ source ("_pages/careers/entry_critical.min.css", ignore_missing = true) }}
+  </style>
+{% endblock %}
+
+{% block aside %}{% endblock %}
+
+{% block content %}
+
+  {#Hero#}
+  {% set thumb = {
+    mode: 'fit',
+    width: 2000,
+    quality: 75,
+    position: 'center-center'
+  } %}
+  {% set image = entry.backgroundImage|length ? entry.backgroundImage.one.getUrl(thumb) : craft.entries.section('careersIndex').one.backgroundImage.one.getUrl(thumb) ?? '/img/site/blog-hero-default.png' %}
+  {% set vars = {
+    'backgroundImage': image,
+    'title': entry.title,
+    'careers': true
+  } %}
+  {% include '_partials/hero-banner' with vars %}
+
+  <nav class="page-subnav for-stay share">
+    <a class="nav-link">{{ 'Share:'|t }}</a>
+    <a class="nav-link icon facebook" href="http://www.facebook.com/sharer/sharer.php?u={{ entry.url|url_encode }}&title={{ entry.title|url_encode }}"></a>
+    <a class="nav-link icon linkedin" href="https://www.linkedin.com/shareArticle?url={{ entry.url|url_encode }}&title={{ entry.title|url_encode }}"></a>
+    <a class="nav-link icon twitter" href="http://twitter.com/intent/tweet?status={{ entry.title|url_encode }}+{{ entry.url|url_encode }}"></a>
+  </nav>
+
+  <section class="blog-content-wrapper">
+    {% set blocks = entry.blogContent %}
+    {% include '_partials/blog/_blocks' %}
+  </section>
+
+  {#Application#}
+  <section class="contact-form-wrapper" id="application-form">
+    <section class="contact-form">
+      <h3 class="big-title"><span>{{ 'Apply now'|t }}</span></h3>
+      <form class="site-form" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
+        {#SUCCESS MESSAGE#}
+        {% if craft.app.session.hasFlash('notice') %}
+          <div class="alert-success" id="success">
+            {{ 'Thank you! Your application has been sent successfully.'|t }}
+          </div>
+        {% endif %}
+        {#HIDDEN INPUTS#}
+        {{ getCsrfInput() }}
+        <input type="hidden" name="action" value="contact-form/send">
+        <input type="hidden" name="title" value="Candidature du {{ now.w3c }}">
+        <input type="hidden" name="notice" value="{{ "success"|hash }}">
+        {#ERROR MESSAGES#}
+        {% macro errorList(errors) %}
+          {% if errors %}
+            <ul class="errors">
+              {% for error in errors %}
+                <li>{{ error }}</li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+        {% endmacro %}
+        {% from _self import errorList %}
+        <input type="hidden" name="message[formName]" value="Applications">
+        <input type="hidden" name="subject" value="{{ 'New application for {jobName}'|t({jobName: entry.title}) }}">
+        <input type="hidden" name="message[Job]" value="{{ entry.title }}">
+        <input id="secretHoneypotApplication" name="secretHoneypotApplication" type="text">
+        {#INPUTS#}
+        <input type="text" name="fromName" value="{{ message.fromName ?? '' }}"
+               placeholder="{{ 'First and last name'|t }}" class="form-input" required>
+        {{ message is defined and message ? errorList(message.getErrors('fromName')) }}
+        <input type="email" name="fromEmail" value="{{ message.fromEmail ?? '' }}" placeholder="{{ 'Email'|t }}"
+               class="form-input" required>
+        {{ message is defined and message ? errorList(message.getErrors('fromEmail')) }}
+        <input type="tel" name="message[Phone]" value="" placeholder="{{ 'Phone'|t }}" class="form-input"
+               value="{{ message.message.Phone ?? '' }}" required>
+        {{ message is defined and message ? errorList(message.getErrors('message.Phone')) }}
+        <div class="form-input file-section">
+          <label for="careersResume">{{ 'Add your resume'|t }}</label>
+          <input type="file" id="careersResume" name="attachment" required>
+        </div>
+        {{ message is defined and message ? errorList(message.getErrors('attachment')) }}
+        <textarea name="message[body]" placeholder="Message" class="form-textarea">
+          {{ message.message.body ?? '' }}
+        </textarea>
+        {{ message is defined and message ? errorList(message.getErrors('message.body')) }}
+        <button type="submit" class="site-btn">{{ 'Submit'|t }}</button>
+      </form>
+    </section>
+  </section>
+
+{% endblock %}
+
+{% block _inline_js %}
+{% endblock %}

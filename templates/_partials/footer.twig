@@ -1,0 +1,75 @@
+{# @var craft \craft\web\twig\variables\CraftVariable #}
+{# Footer #}
+{% cache globally using key 'main-footer' %}
+  <footer class="site-footer">
+    <section class="footer-container">
+      {#Logo#}
+      {% if footer.footerLogo|length %}
+        <section class="footer-column">
+          <img class="footer-logo" src="{{ footer.footerLogo.one.url }}">
+        </section>
+      {% endif %}
+      {#Links#}
+      {% set links = footer.footerLinks.one.columnLinks %}
+      {% if links|length %}
+        <section class="footer-column">
+          {% if footer.footerLinks.one.columnTitle is not empty %}
+            <h3 class="footer-title">{{ footer.footerLinks.one.columnTitle }}</h3>
+          {% endif %}
+          {% for link in links %}
+            <a class="nav-link" href="{{ link.linkUrl.url }}">{{ link.linkName }}</a>
+          {% endfor %}
+        </section>
+      {% endif %}
+      {#Social Links#}
+      {% if socialLinks.socialLinks|length %}
+        {% set socials = socialLinks.socialLinks.one %}
+        <section class="footer-column">
+          <h3 class="footer-title">{{ 'Follow us'|t }}</h3>
+          {% if socials.facebookLink is not empty %}
+            <a class="nav-link" href="{{ socials.facebookLink }}" target="_blank"><i
+                class="icon-facebook"></i>Facebook</a>
+          {% endif %}
+          {% if socials.twitterLink is not empty %}
+            <a class="nav-link" href="{{ socials.twitterLink }}" target="_blank"><i class="icon-twitter"></i>Twitter</a>
+          {% endif %}
+          {% if socials.instagramLink is not empty %}
+            <a class="nav-link" href="{{ socials.instagramLink }}" target="_blank"><i class="icon-instagram"></i>Instagram</a>
+          {% endif %}
+          {% if socials.linkedinLink is not empty %}
+            <a class="nav-link" href="{{ socials.linkedinLink }}" target="_blank"><i
+                class="icon-linkedin"></i>Linkedin</a>
+          {% endif %}
+          {% if socials.youtubeLink is not empty %}
+            <a class="nav-link" href="{{ socials.youtubeLink }}" target="_blank"><i class="icon-youtube"></i>Youtube</a>
+          {% endif %}
+        </section>
+      {% endif %}
+      {#Newsletter#}
+      {% set newsletterSection = footer.footerNewsletter.one %}
+      {% if newsletterSection.newsletterActivate %}
+      <section class="footer-column">
+        {% if newsletterSection.newsletterHeading is not empty %}
+          <h3 class="footer-title">{{ newsletterSection.newsletterHeading }}</h3>
+        {% endif %}
+        {% if newsletterSection.newsletterText is not empty %}
+          <p class="footer-text">{{ newsletterSection.newsletterText }}</p>
+        {% endif %}
+        <form class="footer-newsletter-form">
+          <input type="email" placeholder="Your email address here">
+          <button type="submit">Submit</button>
+        </form>
+      </section>
+      {% endif %}
+    </section>
+    <section class="footer-bottom">
+      <p class="footer-legal">© {{ systemName }} - {{ 'All rights reserved'|t }}</p>
+      {% set terms = craft.entries.section('termsOfUse').one %}
+      <a class="footer-rights" href="{{ terms.url }}">{{ terms.title }}</a>
+      {% set policy = craft.entries.section('privacyPolicy').one %}
+      <a class="footer-rights" href="{{ policy.url }}">{{ policy.title }}</a>
+      {% set cookie = craft.entries.section('cookiePolicy').one %}
+      <a class="footer-rights" href="{{ cookie.url }}">{{ cookie.title }}</a>
+    </section>
+  </footer>
+{% endcache %}

@@ -1,0 +1,258 @@
+// --------------------------------------------------
+// Side Panel Form
+// --------------------------------------------------
+
+.refer-popup {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  width: 425px;
+  max-width: 100%;
+  height: 100vh;
+
+  padding: 60px 40px 50px;
+
+  background-color: $white;
+
+  overflow: scroll;
+  transform: translate(100%, 0);
+  transition: all 0.3s ease-in;
+  z-index: -1;
+
+  &.opened {
+    z-index: 99999;
+    transform: translate(0, 0);
+ }
+
+  .refer-title {
+    @extend .title4;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    font-weight: 400;
+    color: $colorTextDark;
+  }
+
+  .refer-subtitle {
+    @extend .title4;
+    margin-bottom: 20px;
+    font-size: 16px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    font-weight: 400;
+    color: $colorTextDark;
+  }
+
+  .refer-text {
+    @extend .main-text;
+    margin-bottom: 10px;
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+  .refer-popup-close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    cursor: pointer;
+
+    span {
+      font-size: 24px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+  }
+
+  .refer-popup-form {
+    margin-bottom: 30px;
+
+    .refer-subtitle {
+      margin-top: 20px;
+    }
+  }
+}
+
+.refer-overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: calc(100%);
+  background: rgba(0,0,0,.0);
+  z-index: -1;
+  transition: all 0.3s ease-in;
+
+  &.opened {
+    z-index: 9999;
+    background: rgba(0,0,0,.5);
+    cursor: url(../images/cursor.png), auto;
+  }
+}
+
+
+.title4 {
+  font-size: 18px;
+  line-height: 20px;
+
+  @media all and (max-width: 1024px) {
+    font-size: 16px;
+    line-height: 18px;
+  }
+
+  @media all and (max-width: 599px) {
+    font-size: 14px;
+    line-height: 16px;
+  }
+}
+
+.main-text {
+  margin: 0;
+  padding: 0;
+  color: $dark;
+  font-size: 16px;
+  font-weight: 400;
+  letter-spacing: 0em;
+  line-height: 24px;
+
+  @media all and (max-width: 767px) {
+    font-size: 14px;
+    line-height: 20px;
+  }
+}
+
+// --------------------------------------------------
+// Side Panel Info
+// --------------------------------------------------
+
+.team-grid-popup {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+  max-width: 100%;
+  height: 100vh;
+
+  padding: 60px 40px 50px;
+
+  background-color: $white;
+
+  overflow: scroll;
+  transform: translate(100%, 0);
+  transition: all 0.3s ease-in;
+  z-index: -1;
+
+  @media (max-width: 767px) {
+    padding: 60px 20px 55px 20px;
+  }
+
+  &.opened {
+    z-index: 99999;
+    transform: translate(0, 0);
+  }
+
+  .content-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 1275px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+
+    @media (max-width: 767px) {
+      display: block;
+      flex-direction: column;
+    }
+  }
+
+  .team-grid-popup-header {
+    width: auto;
+    margin-right: 50px;
+    margin-top: 20px;
+  }
+
+  .team-grid-popup-content {
+    width: 100%;
+  }
+
+  .team-grid-title {
+    @extend .title4;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    font-weight: 400;
+    color: $colorTextDark;
+  }
+
+  .team-grid-subtitle {
+    @extend .title4;
+    margin-bottom: 20px;
+    font-size: 16px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    font-weight: 400;
+    color: $colorTextDark;
+  }
+
+  .team-img {
+    display: block;
+    width: 100%;
+    max-width: 350px;
+  }
+
+  .team-grid-text {
+    @extend .main-text;
+    margin-bottom: 10px;
+    font-size: 16px;
+    line-height: 1.7;
+    font-weight: 300;
+    padding-bottom: 20px;
+    letter-spacing: 0.035em;
+  }
+
+  .team-grid-popup-close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    cursor: pointer;
+
+    span {
+      font-size: 24px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+  }
+
+  .team-grid-popup-form {
+    margin-bottom: 30px;
+
+    .team-grid-subtitle {
+      margin-top: 20px;
+    }
+  }
+}
+
+.team-grid-overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: calc(100%);
+  background: rgba(0,0,0,.0);
+  z-index: -1;
+  transition: all 0.3s ease-in;
+
+  &.opened {
+    z-index: 9999;
+    background: rgba(0,0,0,.5);
+    cursor: url(../images/cursor.png), auto;
+  }
+}

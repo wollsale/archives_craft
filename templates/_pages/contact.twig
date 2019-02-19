@@ -1,0 +1,123 @@
+{# @var craft \craft\web\twig\variables\CraftVariable #}
+{% set pageClass = 'contact' %}
+{% extends "_layouts/_layout.twig" %}
+
+{% block _inline_css %}
+  <style>
+    {{ source ("index_critical.min.css", ignore_missing = true) }}
+  </style>
+{% endblock %}
+
+{% block content %}
+  {% cache globally using key 'contact' %}
+
+    {#Hero#}
+    {% set thumb = {
+      mode: 'fit',
+      width: 2000,
+      quality: 75,
+      position: 'center-center'
+    } %}
+    {% set image = '/img/site/blog-hero-default.png' %}
+    {% set vars = {
+      'backgroundImage': image,
+      'title': entry.title,
+    } %}
+    {% include '_partials/hero-banner' with vars %}
+
+    {% set locations = entry.contactLocations %}
+
+    {# Locations #}
+    <div class="block-cta contact-cta">
+      <div class="cta-cards mobile-slider">
+        {% for location in locations %}
+          <div class="cta-card {% if loop.first %} is-active{% endif %} js-map-btn mobile-slide"
+               data-map-holder="#map-{{ location.id }}">
+            <div class="cta-card-wrap">
+              {#<img src="/assets/images/icon-quebec.svg" class="cta-card-icon" alt="About Icon" style="width: 80px;">#}
+              <h4 class="cta-card-title">{{ location.officeName }}</h4>
+              <p class="cta-card-short">
+                {#{{ location. }}#}
+                {% if location.officeEmail is not empty %}<a
+                  href="mailto:{{ location.officeEmail }}">{{ location.officeEmail }}</a><br>{% endif %}
+                {% if location.officePhone is not empty %}<a
+                  href="tel:+1{{ location.officePhone }}">{{ location.officePhone }}</a><br>{% endif %}
+              </p>
+              <div class="cta-card-hidden">
+                <a target="_blank"
+                   href="https://www.google.ca/maps/dir//{{ location.officeLocation.location|url_encode }}/@{{ location.officeLocation.lat }},{{ location.officeLocation.lng }},16.83z?hl={{ craft.locale }}"
+                   class="cta-card-button js-map" data-mapHolder="map1">{{ 'Get Directions'|t }}</a>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    {# Maps #}
+    {% for location in locations %}
+      <section class="map-holder">
+        <div class="map{% if loop.first %} is-active{% endif %}" id="map-{{ location.id }}"
+             data-map
+             data-map-lat="{{ location.officeLocation.lat }}"
+             data-map-lng="{{ location.officeLocation.lng }}"
+        ></div>
+      </section>
+    {% endfor %}
+
+    <section class="contact-form-wrapper" id="contact-form">
+      <section class="contact-form">
+        <h3 class="big-title"><span>{{ 'Contact Us'|t }}</span></h3>
+        <form class="site-form" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
+          {#SUCCESS MESSAGE#}
+          {% if craft.app.session.hasFlash('notice') %}
+            <div class="alert-success" id="success">
+              {{ 'Thank you! Your application has been sent successfully.'|t }}
+            </div>
+          {% endif %}
+          {#HIDDEN INPUTS#}
+          {{ getCsrfInput() }}
+          <input type="hidden" name="action" value="contact-form/send">
+          <input type="hidden" name="title" value="Contact du {{ now.w3c }}">
+          <input type="hidden" name="notice" value="{{ "success"|hash }}">
+          {#ERROR MESSAGES#}
+          {% macro errorList(errors) %}
+            {% if errors %}
+              <ul class="errors">
+                {% for error in errors %}
+                  <li>{{ error }}</li>
+                {% endfor %}
+              </ul>
+            {% endif %}
+          {% endmacro %}
+          {% from _self import errorList %}
+          <input type="hidden" name="message[formName]" value="Contact">
+          <input type="hidden" name="subject" value="{{ 'Contact'|t }}">
+          <input id="secretHoneypotSpontaneousApplication" name="secretHoneypotSpontaneousApplication" type="text">
+          {#INPUTS#}
+          <input type="text" name="fromName" value="{{ message.fromName ?? '' }}"
+                 placeholder="{{ 'First and last name'|t }}" class="form-input" required>
+          {{ message is defined and message ? errorList(message.getErrors('fromName')) }}
+          <input type="email" name="fromEmail" value="{{ message.fromEmail ?? '' }}" placeholder="{{ 'Email'|t }}"
+                 class="form-input" required>
+          {{ message is defined and message ? errorList(message.getErrors('fromEmail')) }}
+          <input type="tel" name="message[Phone]" value="" placeholder="{{ 'Phone'|t }}" class="form-input"
+                 value="{{ message.message.Phone ?? '' }}" required>
+          {{ message is defined and message ? errorList(message.getErrors('message.Phone')) }}
+          <input type="tel" name="message[Company]" value="" placeholder="{{ 'Company'|t }}" class="form-input"
+                 value="{{ message.message.Company ?? '' }}" required>
+          {{ message is defined and message ? errorList(message.getErrors('message.Company')) }}
+          <textarea name="message[body]" placeholder="Message" class="form-textarea">
+          {{ message.message.body ?? '' }}
+        </textarea>
+          {{ message is defined and message ? errorList(message.getErrors('message.body')) }}
+          <button type="submit" class="site-btn">{{ 'Submit'|t }}</button>
+        </form>
+      </section>
+    </section>
+
+  {% endcache %}
+{% endblock %}
+
+{% block _inline_js %}
+{% endblock %}

@@ -1,0 +1,81 @@
+// --------------------------------------------------
+// Content - Pagination
+// --------------------------------------------------
+
+.content-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 75px;
+
+  @media (max-width: 1099px) {
+    padding: 25px 20px;
+  }
+
+  a,
+  div {
+    display: block;
+    height: 35px;
+    padding: 10px 15px;
+
+    border-top: 1px $light solid;
+    border-bottom: 1px $light solid;
+    border-left: 1px $light solid;
+
+    background: #fff;
+    color: $dark;
+    text-decoration: none;
+
+    @extend .button-text;
+
+    &.content-pagination-prev,
+    &.content-pagination-next {
+      span {
+        display: block;
+        width: 0;
+        height: 0;
+        border-top: 6.2px solid transparent;
+        border-bottom: 6.2px solid transparent;
+      }
+    }
+
+    &.content-pagination-prev {
+      border-radius: 3px 0 0 3px;
+
+      span {
+        border-right: 6.2px solid $colorAccent1;
+
+        &.is-disabled {
+          border-right-color: $light;
+        }
+      }
+    }
+
+    &.content-pagination-next {
+      border-right: 1px $light solid;
+      border-radius: 0 3px 3px 0;
+
+      span {
+        border-left: 6.2px solid $colorAccent1;
+
+        &.is-disabled {
+          border-left-color: $light;
+        }
+      }
+    }
+
+    &:hover {
+      color: $colorAccent1;
+    }
+
+    &.is-current {
+      background: $dark;
+      color: #fff;
+    }
+
+    &:last-child {
+      border-right: 1px $light solid;
+    }
+  }
+}

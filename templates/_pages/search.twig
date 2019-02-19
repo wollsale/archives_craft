@@ -1,0 +1,61 @@
+{# @var craft \craft\web\twig\variables\CraftVariable #}
+{% set pageClass = 'search extends post-details extends news-events' %}
+{% extends "_layouts/_layout.twig" %}
+
+{% block _inline_css %}
+  <style>
+    {{ source ("index_critical.min.css", ignore_missing = true) }}
+  </style>
+{% endblock %}
+
+{% block aside %}{% endblock %}
+
+{% block sectionHero %}
+  {% include '_partials/section-hero' with { title: 'Search', image: craft.entries.section('contact').one.sectionHero.image.one, effect: 'grey'  } %}
+{% endblock %}
+
+{% block content %}
+
+  {# Search Query #}
+  {% set query = craft.request.getParam('query') %}
+
+  {% if query %}
+    {% set query = query|replace('-1', '')|replace('-2', '')|replace('-3', '')|replace('-', ' ') %}
+  {% endif %}
+
+  {# Pass the search query directly into the search param: #}
+  {% set newsContent = craft.entries({
+    section: 'blog',
+    search: query,
+    orderBy: 'score'
+  }).limit(6) %}
+
+  {# Posts - newsContent list #}
+  {% paginate newsContent as pageInfo, entries %}
+  <section class="blog-listing-wrapper">
+    <section class="blog-listing-container">
+
+      <div class="separator-content-wrapper ">
+        <h2 class="medium-title is-section-devider">
+          <span>{{ 'Most recent articles'|t }}</span>
+        </h2>
+      </div>
+
+      <section class="blog-listing" data-ajax-paginate="news">
+        {% for article in newsContent %}
+          {% include '_partials/cards/blog' %}
+        {% endfor %}
+      </section>
+
+      <div class="cards-pagination" data-ajax-pagination="news">
+        {% if pageInfo.totalPages > 1 %}
+          {% include "_partials/cards/pagination" %}
+        {% endif %}
+      </div>
+    </section>
+  </section>
+
+{% endblock %}
+
+{% block _inline_js %}
+{% endblock %}

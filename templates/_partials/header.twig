@@ -1,0 +1,59 @@
+{# @var craft \craft\web\twig\variables\CraftVariable #}
+{# Main Nav Component #}
+{% cache globally using key 'header-nav' %}
+  <div id="main-nav-component">
+    <header id="main-header" class="main-header">
+      <section class="header-container">
+
+        {#Logo#}
+        <a class="header-logo" href="/{{ siteLang }}" title="SITE_NAME">
+          {% if header.headerLogo is not empty %}
+            {% set thumb = {
+              mode: 'fit',
+              height: 40,
+              quality: 100,
+            } %}
+            <img src="{{ header.headerLogo.one.getUrl(thumb) }}" alt="Halt 24-7">
+          {% else %}
+            <img src="/img/site/tfi-logo.svg" alt="Halt 24-7">
+          {% endif %}
+        </a>
+
+        <nav class="header-nav">
+          {#Navigation#}
+          {% for item in header.mainNav.all() %}
+            <a class="header-link {{ craft.app.request.absoluteUrl == item.headerLink.url ? 'is-active' : '' }}"
+               href="{{ item.headerLink.url }}" title="{{ item.headerLinkText }}">{{ item.headerLinkText }}</a>
+          {% endfor %}
+        </nav>
+
+        <section class="header-right">
+          <p class="header-phone">
+
+            {#Phone number#}
+            {% if header.headerPhone is not empty %}
+              <a href="tel:+1{{ header.headerPhone }}" target="_blank">{{ header.headerPhone }}</a> |
+            {% endif %}
+
+            {#Locales switcher#}
+            {% for siteForEntry in entry.getSupportedSites %}
+              {% set site = craft.app.getSites.getSiteById(siteForEntry.siteId) %}
+              {% if site.id != entry.siteId %}
+                {% set entryForOtherSite = craft.entries.id(entry.id).site(site).one() %}
+                <a class="language-link" href="{{ entryForOtherSite.getUrl() }}">{{ site.handle|upper }}</a>
+              {% endif %}
+            {% endfor %}
+          </p>
+
+          {#Main button#}
+          {% set button = header.headerButton %}
+          {% if button %}
+            <a class="site-btn" href="{{ button.url }}" target="{{ button.target }}">{{ button.text }}</a>
+          {% endif %}
+          <div class="mobile-menu-trigger" :class="{ 'is-active': navIsOpened }" @click="toggleNavOpened"></div>
+        </section>
+
+      </section>
+    </header>
+  </div>
+{% endcache %}

@@ -1,0 +1,34 @@
+{% for block in blocks %}
+
+  {% switch block.type %}
+
+    {% case "intro001" %}
+      {% include "_partials/blocks/intro001" %}
+
+    {% case "intro002" %}
+      {% include "_partials/blocks/intro002" %}
+
+    {% case "panelsRow001" %}
+      {% include "_partials/blocks/panelsRow001" %}
+
+    {% case "teamGrid001" %}
+      {% include "_partials/blocks/teamGrid001" %}
+
+    {% case "timeline001" %}
+      {% include "_partials/blocks/timeline001" %}
+
+    {% case "slider001" %}
+      {% include "_partials/blocks/slider001" %}
+
+    {% case "grid001" %}
+      {% include "_partials/blocks/grid001" %}
+
+    {% case "split001" %}
+      {% include "_partials/blocks/split001" %}
+
+    {% case "partners001" %}
+      {% include "_partials/blocks/partners001" %}
+
+  {% endswitch %}
+
+{% endfor %}

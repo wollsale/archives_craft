@@ -1,0 +1,19 @@
+<section class="blog-author">
+  <h3 class="big-title"><span>{{ block.heading is not empty ? block.heading : 'About the author'|t }}</span></h3>
+  <section class="blog-author-infos">
+    {% if block.authorImage|length %}
+      {% set thumb = {
+        width: 120,
+        height: 120,
+        quality: 75,
+        position: 'center-center'
+      } %}
+      <img class="blog-author-avatar" src="{{ block.authorImage.one.getUrl(thumb) }}">
+    {% endif %}
+    <div>
+      <h4 class="blog-author-name">{{ block.authorName }}</h4>
+      {% if block.authorJobTitle is not empty %}<p class="blog-author-job">{{ block.authorJobTitle }}</p>{% endif %}
+    </div>
+  </section>
+  <p class="blog-author-bio">{{ block.authorBio|nl2br }}</p>
+</section>

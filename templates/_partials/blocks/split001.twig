@@ -1,0 +1,32 @@
+<section class="site-block block-gallery-text {{ block.position == 'right' ? 'reversed-block' }} fullwidth-block">
+  <div class="gallery-wrapper">
+    <div class="gallery-slides">
+      {% for image in block.image %}
+        <img src="{{ image.url }}" alt="{{ image.title }}" />
+      {% endfor %}
+    </div>
+
+    <div class="gallery-controls"></div>
+  </div>
+
+  <div class="gallery-content">
+    <h2 class="medium-title">{{ block.heading }}</h2>
+
+    <div class="reading-text">
+      {{ block.text|raw }}
+    </div>
+
+    {% if block.button %}
+      {% set button = block.button %}
+      {% set buttonUrl = button.url %}
+      {% set canScroll = null %}
+
+      {% if 'Url' in button.type and button.target != 1 %}
+        {% set buttonUrl = button.url|replace({'http://' : '', 'https://' : ''}) %}
+        {% set canScroll = true %}
+      {% endif %}
+
+      <a href="{{ buttonUrl }}" class="site-btn is-outlined dark-outlined" {{ canScroll is not null ? 'data-scroll' }} {{ button.target == 1 ? 'target="_blank"' }}>{{ button.text }}</a>
+    {% endif %}
+  </div>
+</section>

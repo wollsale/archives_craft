@@ -1,0 +1,10 @@
+.reading-text ul.parsley-errors-list.filled, .parsley-errors-list.filled {
+  position: absolute;
+  bottom: 10px;
+  right: 0;
+}
+
+.reading-text ul.parsley-errors-list li, .parsley-errors-list li {
+  font-size: 12px !important;
+  font-family: $fontTextLight !important;
+}

@@ -1,0 +1,12 @@
+{#
+ # Emails - Contact Template
+ # ------------
+#}
+
+{% extends "_emails/master" %}
+
+{% block content %}
+
+  {{ body is defined ? body }}
+
+{% endblock %}

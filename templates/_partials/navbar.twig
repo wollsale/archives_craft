@@ -1,0 +1,23 @@
+{# @var craft \craft\web\twig\variables\CraftVariable #}
+{# Main nav links #}
+<nav class="main-nav">
+
+  {# Top bar Burger menu #}
+  {# <div class="nav-link main-nav-burger" id="main-nav-burger">
+    <i class="icon-menu"></i>
+  </div> #}
+
+  {# Main links #}
+  {% for item in globalNav.mainNav.all() %}
+    <a
+      class="nav-link {{craft.app.request.absoluteUrl == item.button.url|slice(0, -1) ? 'is-active' : ''}}"
+      href="{{item.button.url}}"
+      title="{{item.text}}"
+      @mouseover="prerenderLink">{{item.text}}</a>
+  {% endfor %}
+
+  {# Nav CTA #}
+  {% if globalNav.mainNavCta %}
+    <a class="nav-link site-btn" href="{{globalNav.mainNavCta.url}}" title="{{globalNav.mainNavCta.text}}">{{globalNav.mainNavCta.text}}</a>
+  {% endif %}
+</nav>

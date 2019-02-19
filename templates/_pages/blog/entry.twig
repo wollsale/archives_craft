@@ -1,0 +1,81 @@
+{# @var craft \craft\web\twig\variables\CraftVariable #}
+{% set pageClass = 'app-showsfeed' %}
+{% extends "_layouts/_layout.twig" %}
+
+{% block _inline_css %}
+  <style>
+    {{ source ("_pages/blog/entry_critical.min.css", ignore_missing = true) }}
+  </style>
+{% endblock %}
+
+{% block aside %}{% endblock %}
+
+{% block content %}
+{% cache globally using key entry.slug %}
+  {#Hero#}
+
+  {% set thumb = {
+    mode: 'fit',
+    width: 2000,
+    quality: 75,
+    position: 'center-center'
+  } %}
+
+  {% set backgroundImage = entry.backgroundImage.one.getUrl(thumb) %}
+  {% set title = entry.title %}
+  {% set suptitle = entry.blogCategory|length ? entry.blogCategory.one.title : false %}
+
+  {% set image = entry.backgroundImage|length ? entry.backgroundImage.one.getUrl(thumb): '/img/site/blog-hero-default.png' %}
+  {% set vars = {
+    'backgroundImage': image,
+    'title': entry.title,
+    'suptitle': entry.blogCategory|length ? entry.blogCategory.one.title : false
+  } %}
+  {% include '_partials/hero-banner' with vars %}
+
+  <nav class="page-subnav for-stay share">
+    <a class="nav-link">{{ 'Share:'|t }}</a>
+    <a class="nav-link icon facebook"
+       href="http://www.facebook.com/sharer/sharer.php?u={{ entry.url|url_encode }}&title={{ entry.title|url_encode }}"></a>
+    <a class="nav-link icon linkedin"
+       href="https://www.linkedin.com/shareArticle?url={{ entry.url|url_encode }}&title={{ entry.title|url_encode }}"></a>
+    <a class="nav-link icon twitter"
+       href="http://twitter.com/intent/tweet?status={{ entry.title|url_encode }}+{{ entry.url|url_encode }}"></a>
+  </nav>
+
+  <section class="blog-content-wrapper">
+    <p class="blog-date">{{ entry.postDate|date('l F jS, Y, g:i A'|t) }}</p>
+
+    {% set blocks = entry.blogContent %}
+    {% include '_partials/blog/_blocks' %}
+  </section>
+
+  {#Other shows#}
+  {% set categories = entry.blogCategory %}
+  {% if categories|length %}
+    {% set otherArticles = craft.entries.section('blog').relatedTo(categories).id('not ' ~ entry.id).limit(3) %}
+    {% if otherArticles|length < 3 %}
+      {% set otherArticles = craft.entries.section('blog').id('not ' ~ entry.id).limit(3) %}
+    {% endif %}
+  {% else %}
+    {% set otherArticles = craft.entries.section('blog').id('not ' ~ entry.id).limit(3) %}
+  {% endif %}
+  {% if otherArticles|length %}
+    <section class="blog-listing-wrapper grey">
+      <section class="blog-listing-container">
+        <h1 class="big-title"><span class="white-bg">{{ 'Related articles'|t }}</span></h1>
+        <section class="blog-listing">
+          {% for article in otherArticles %}
+            {% include '_partials/cards/blog' %}
+          {% endfor %}
+        </section>
+        <a class="site-btn"
+           href="{{ craft.entries.section('blogListing').one.url }}">{{ 'See more articles'|t }}</a>
+      </section>
+    </section>
+  {% endif %}
+{% endcache %}
+{% endblock %}
+
+{% block _inline_js %}
+{% endblock %}

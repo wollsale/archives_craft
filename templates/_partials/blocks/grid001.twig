@@ -1,0 +1,31 @@
+<section class="site-block block-grid">
+
+  <div class="separator-content-wrapper">
+    <h2 class="big-title"><span class="white-bg">{{ block.heading }}</span></h2>
+  </div>
+
+  {% if block.text %}
+    <div class="regular-text grid-text">{{ block.text|raw }}</div>
+  {% endif %}
+
+  <div class="grid-items">
+    {% for item in block.items %}
+      <div class="grid-item">
+
+        {% if item.image.first is defined and item.image.first %}
+          <span class="icon-holder" style="background-image: url('{{ item.image.first.url }}');"></span>
+        {% endif %}
+
+        <h3 class="small-title">
+          {{ item.heading }}
+        </h3>
+
+        <div class="regular-text">
+          {{ item.text }}
+        </div>
+
+      </div>
+    {% endfor %}
+  </div>
+
+</section>

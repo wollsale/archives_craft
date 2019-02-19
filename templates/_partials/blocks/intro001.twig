@@ -1,0 +1,10 @@
+{% set title = setTitle ?? block.heading ?? '' %}
+{% set text = setText ?? block.text ?? '' %}
+
+<div class="site-block block-intro001">
+  {% if title %}
+    <h2 class="intro-title">{{title|nl2br}}</h2>
+    <div class="intro-separator"></div>
+  {% endif %}
+  <div class="intro-content">{{text|raw}}</div>
+</div>

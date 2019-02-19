@@ -1,0 +1,5 @@
+<section class="blog-quote">
+  <h3 class="blog-quote-title">{{ block.quote|nl2br }}</h3>
+  {% if block.author is not empty %}<p class="blog-quote-author">{{ block.author }}</p>{% endif %}
+  {% if block.subtitle is not empty %}<p class="blog-quote-subtitle">{{ block.subtitle }}</p>{% endif %}
+</section>

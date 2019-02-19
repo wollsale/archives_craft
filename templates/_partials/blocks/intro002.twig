@@ -1,0 +1,20 @@
+{% set title = setTitle ?? block.heading ?? '' %}
+{% set text = setText ?? block.text ?? '' %}
+{% set text2 = setText2 ?? block.text2 ?? '' %}
+{% set btn = setBtn ?? block.button ?? '' %}
+
+<div class="site-block block-intro002">
+  <div class="intro-wrapper">
+    {% if title %}
+      <h2 class="intro-title">{{title|nl2br}}</h2>
+    {% endif %}
+    <div class="intro-content">{{text|raw}}</div>
+    <img class="intro-separator" src="/img/site/hr.svg" alt=" ">
+    {% if text2 %}
+      <div class="intro-content">{{text2|raw}}</div>
+    {% endif %}
+    {% if btn %}
+      <a class="intro-btn" href="{{ btn.url }}" title="{{ btn.text }}" {{ btn.target ? 'target="_blank' : '' }} data-trigger-refer="" >{{ btn.text }}</a>
+    {% endif %}
+  </div>
+</div>

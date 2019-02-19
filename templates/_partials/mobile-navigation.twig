@@ -1,0 +1,60 @@
+<aside class="navigation-mobile" :class="{ 'is-active': navIsOpened }">
+  <div class="navigation-header">
+    {#Logo#}
+    <a href="/{{ siteLang }}">
+      <img class="logo" src="/img/site/tfi-logo.svg" alt="SITE_NAME">
+    </a>
+    <a href="#" class="navigation-close" @click="toggleNavOpened"><span>×</span></a>
+  </div>
+  <div class="navigation-link">
+    {#Navigation#}
+    {% for item in header.mainNav.all() %}
+      <a href="{{ item.headerLink.url }}">{{ item.headerLinkText }}</a>
+    {% endfor %}
+  </div>
+  <div class="navigation-sublink">
+    {#Phone number#}
+    {% if header.headerPhone is not empty %}
+      <a href="tel:+1{{ header.headerPhone }}" target="_blank">{{ header.headerPhone }}</a>
+    {% endif %}
+    {#Main button#}
+    {% set button = header.headerButton %}
+    {% if button %}
+      <a class="site-btn" href="{{ button.url }}" target="{{ button.target }}">{{ button.text }}</a>
+    {% endif %}
+  </div>
+  <div class="navigation-footer">
+    {#Social links#}
+    <div class="navigation-footer-social">
+      {% set socials = socialLinks.socialLinks.first %}
+      {% if socials.facebookLink is not empty %}
+        <a href="{{ socials.facebookLink }}" target="_blank" rel="noopener" title="Facebook">
+          <img src="/img/site/icon-facebook-dark.svg" alt="Facebook icon">
+        </a>
+      {% endif %}
+      {% if socials.twitterLink is not empty %}
+        <a href="{{ socials.twitterLink }}" target="_blank" rel="noopener" title="Twitter">
+          <img src="/img/site/icon-twitter-dark.svg" alt="Twitter icon">
+        </a>
+      {% endif %}
+      {% if socials.linkedinLink is not empty %}
+        <a href="{{ socials.linkedinLink }}" target="_blank" rel="noopener" title="LinkedIn">
+          <img src="/img/site/icon-linkedin-dark.svg" alt="LinkedIn icon">
+        </a>
+      {% endif %}
+      {% if socials.instagramLink is not empty %}
+        <a href="{{ socials.instagramLink }}" target="_blank" rel="noopener" title="Instagram">
+          <img src="/img/site/icon-instagram-dark.svg" alt="Instagram icon">
+        </a>
+      {% endif %}
+    </div>
+    {#Locales switcher#}
+    {% for siteForEntry in entry.getSupportedSites %}
+      {% set site = craft.app.getSites.getSiteById(siteForEntry.siteId) %}
+      {% if site.id != entry.siteId %}
+        {% set entryForOtherSite = craft.entries.id(entry.id).site(site).one() %}
+        <a href="{{ entryForOtherSite.getUrl() }}">{{ site.handle|upper }}</a>
+      {% endif %}
+    {% endfor %}
+  </div>
+</aside>

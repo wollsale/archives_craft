@@ -1,0 +1,259 @@
+// --------------------------------------------------
+// Title
+// --------------------------------------------------
+
+b,
+strong {
+  font-weight: 500;
+}
+
+.big-title {
+  font-family: Verdana, Geneva, sans-serif;
+  font-size: 36px;
+  line-height: 1;
+  color: $colorAccent1;
+  margin-bottom: 45px;
+}
+
+.fonts-loaded .big-title {
+  font-family: $fontTextLight;
+}
+
+.medium-title {
+  font-family: Verdana, Geneva, sans-serif;
+  font-size: 26px;
+  font-weight: 600;
+  letter-spacing: 0.54px; // Doublon
+  line-height: 32px;
+  color: $colorAccent1;
+  letter-spacing: 0.055em;
+}
+
+.fonts-loaded .medium-title {
+  font-family: $fontTitleSerif;
+}
+
+.medium-title.with-child {
+  display: flex;
+  align-items: center;
+
+  @media (max-width: 767px) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  span {
+    display: flex;
+    justify-content: flex-start;
+    flex-grow: 1;
+
+    @media (max-width: 767px) {
+      margin-bottom: 5px;
+    }
+  }
+}
+
+.small-title {
+  font-family: Verdana, Geneva, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  letter-spacing: 0.89px;
+  line-height: 22px;
+  color: $colorAccent1;
+
+  @media screen and (min-width: 1440px) {
+    font-size: 18px;
+    line-height: 24px;
+  }
+}
+
+.fonts-loaded .small-title {
+  font-family: $fontTitle;
+}
+
+// --------------------------------------------------
+// text-emphasis: dot;
+// --------------------------------------------------
+
+.regular-text {
+  font-size: 16px;
+  letter-spacing: .5px;
+  line-height: 1.5;
+  color: #90A0B0;
+  margin-bottom: 20px;
+
+  @media only screen and (max-width: 767px) {
+    font-size: 14px;
+  }
+
+  strong {
+    font-weight: 600;
+    color: #77899a;
+  }
+
+  a {
+    color: $colorAccent3;
+    transition: all 0.35s ease;
+
+    &:hover {
+      color: $colorAccent1;
+    }
+  }
+
+  &.is-centered {
+    width: 100%;
+    text-align: center;
+    letter-spacing: 0.035em;
+    font-size: 18px;
+  }
+}
+
+.text-input {
+  font-size: 12px;
+  font-weight: 300;
+  letter-spacing: 0.29px;
+  line-height: 22px;
+  color: $dark;
+
+  @media screen and (min-width: 1440px) {
+    font-size: 14px;
+    line-height: 24px;
+  }
+}
+
+.small-text {
+  font-size: 11px;
+  font-weight: 300;
+  letter-spacing: 0.5px;
+  line-height: 17px;
+  color: $dark;
+
+  @media screen and (min-width: 1440px) {
+    font-size: 12px;
+    line-height: 18px;
+  }
+}
+
+.links {
+  font-size: 22px;
+  font-weight: 300;
+  letter-spacing: 0.29px;
+  line-height: 14px;
+  color: $colorAccent2;
+
+  @media screen and (min-width: 1440px) {
+    font-size: 24px;
+    line-height: 16px;
+  }
+}
+
+.button-text {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.27px;
+  line-height: 11px;
+
+  @media screen and (min-width: 1440px) {
+    font-size: 13px;
+    line-height: 13px;
+  }
+}
+
+.pagination {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  line-height: 14px;
+  color: $dark;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+// --------------------------------------------------
+// Extra
+// --------------------------------------------------
+
+.light-typo {
+  color: #fff;
+}
+
+.lightblue-typo {
+  color: $colorAccent2;
+}
+
+.centered {
+  text-align: center;
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+.separator-content-wrapper {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+
+  @media only screen and (max-width: 989px) {
+    max-width: 700px;
+    margin: 0 auto;
+  }
+}
+
+.is-separator {
+  position: relative;
+
+  &:before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: -75px;
+    transform: translate3d(-100%, 0, 0);
+    backface-visibility: hidden;
+    filter: blur(0);
+    width: 60%;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.20);
+
+    @media only screen and (max-width: 699px) {
+      left: -45px;
+    }
+  }
+
+  &:after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: -75px;
+    transform: translate3d(100%, 0, 0);
+    backface-visibility: hidden;
+    filter: blur(0);
+    width: 60%;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.20);
+
+    @media only screen and (max-width: 699px) {
+      right: -45px;
+    }
+  }
+}
+
+
+ul {
+  li {
+    line-height: 2;
+  }
+  ul {
+    list-style-type: none;
+    padding: 0;
+    li {
+      line-height: 2;
+    }
+  }
+}

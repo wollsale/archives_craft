@@ -1,0 +1,87 @@
+{# Side Panel Form #}
+{% set beOpened = craft.app.session.hasFlash('notice') ? true : false %}
+<div class="refer-overlay {{ beOpened ? 'opened' : '' }}" data-close-refer=""></div>
+<div class="refer-popup {{ beOpened ? 'opened' : '' }}">
+  <div class="refer-popup-close" data-close-refer=""><span>×</span></div>
+  <div class="refer-popup-header">
+    <h4 class="refer-title">Contact us</h4>
+    <p class="refer-text">
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere quaerat, ex laboriosam!
+    </p>
+  </div>
+
+  {# Form #}
+  <div class="refer-popup-form">
+
+      <form id="vue-form" class="refer-form form" data-form="refer" method="POST" enctype="multipart/form-data">
+        {#SUCCESS MESSAGE#}
+        {% if craft.app.session.hasFlash('notice') %}
+          <div class="alert-success" id="success">
+            {{ 'Thank you! Your contact resquest has been sent successfully.'|t }}
+          </div>
+        {% endif %}
+        {#HIDDEN INPUTS#}
+        {{ getCsrfInput() }}
+        <input type="hidden" name="action" value="contact-form/send">
+        <input type="hidden" name="title" value="Contact du {{ now.w3c }}">
+        <input type="hidden" name="notice" value="{{ "success"|hash }}">
+        {#ERROR MESSAGES#}
+        {% macro errorList(errors) %}
+          {% if errors %}
+            <ul class="errors">
+              {% for error in errors %}
+                <li>{{ error }}</li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+        {% endmacro %}
+        {% from _self import errorList %}
+        <input type="hidden" name="message[formName]" value="Contact Form">
+        <input type="hidden" name="subject" value="{{ 'New contact request'|t }}">
+        <input id="secretHoneypotSpontaneousApplication" name="secretHoneypotSpontaneousApplication" type="text" style="position: absolute; top: -5555px; left: -5555px; opacity: 0;">
+
+        {#INPUTS#}
+        {% verbatim %}
+          <div class="general-alert success" style="display: none;" data-form-success="">
+            <span></span>
+            <p class="success-alert">Thanks for referring us to your friends!</p>
+          </div>
+
+          <h4 class="refer-subtitle">Your information</h4>
+          <div class="form-field input-holder" data-form-field="formFullName">
+            <label for="formFullName">Full name *</label>
+            <input class="no-parsley" type="text" id="formFullName" name="fromName" value="" v-model="$v.fromName.$model" :class="status($v.fromName)" required>
+            <p class="form-error">Oops, this field is required!</p>
+          </div>
+
+          <div class="form-field input-holder" data-form-field="formReferPhone">
+            <label for="formReferPhone">Phone *</label>
+            <input type="text" id="formReferPhone"name="message[phone]" value="" v-model="$v.phone.$model" :class="status($v.phone)" required>
+            <p class="form-error">Oops, this field is required!</p>
+          </div>
+
+          <div class="form-field input-holder" data-form-field="formReferEmail">
+            <label for="formReferEmail">Email address *</label>
+            <input type="email" id="formEmail" name="fromEmail" value="" v-model="$v.email.$model" :class="status($v.email)" required>
+            <p class="form-error">Oops, this field is required!</p>
+          </div>
+
+          <div class="form-field input-holder" data-form-field="formReferEmail">
+            <label for="formReferEmail">Message *</label>
+            <textarea name="message[body]" v-model="$v.message.$model" :class="status($v.message)" required></textarea>
+            <p class="form-error">Oops, this field is required!</p>
+          </div>
+
+          <button class="site-btn" type="submit" data-form-button="" @click.prenvent="handleSubmit()">Send</button>
+          <img src="/assets/images/rings.svg" class="js-loader" alt="Loader">
+        {% endverbatim %}
+      </form>
+  </div>
+
+  <div class="refer-popup-footer">
+    <h4 class="refer-subtitle">Terms and conditions</h4>
+    <p class="refer-text">
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus ducimus laborum rerum labore similique illo eligendi tenetur. Cupiditate unde vitae, aspernatur excepturi!
+    </p>
+  </div>
+</div>

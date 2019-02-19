@@ -1,0 +1,69 @@
+// --------------------------------------------------
+// Btns components
+// --------------------------------------------------
+.site-btn {
+  display: inline-block;
+  padding: 10px 45px;
+  border: 2px solid $colorAccent1;
+  background: $colorAccent1;
+  color: #fff;
+  font-family: $fontTextLight;
+  font-size: 19px;
+  line-height: 1;
+  letter-spacing: -.025em;
+  text-align: center;
+  cursor: pointer;
+  transition: .3s;
+  transition-duration: .3s;
+
+  -webkit-appearance: none;
+
+  &:hover {
+    opacity: .75;
+  }
+
+  &.is-outlined {
+    padding: 15px 25px;
+    border: 1px solid $colorAccent1;
+    background: transparent;
+    color: $colorAccent1;
+    font-family: $fontTitleSerif;
+    font-size: 16px;
+    font-weight: 400;
+    letter-spacing: 0;
+
+    &:hover {
+      border-color: $colorAccent3;
+      color: $colorAccent3;
+      opacity: 1;
+    }
+
+    &.reverted-hover {
+      &:hover {
+        border-color: $dark;
+        color: $dark;
+        opacity: 1;
+      }
+    }
+  }
+
+  &.is-bigger {
+    min-width: 200px;
+    padding: 15px 25px;
+    font-size: 18px;
+  }
+
+  &.is-alternate {
+    border-color: $colorAccent3;
+    background: $colorAccent3;
+  }
+}
+
+.link-text-btn {
+  padding: 15px 0;
+  padding-right: 45px;
+  border-bottom: 3px solid $colorAccent3;
+  color: $colorAccent3;
+  font-family: $fontTitleSerif;
+  text-transform: uppercase;
+}

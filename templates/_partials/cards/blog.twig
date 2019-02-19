@@ -1,0 +1,18 @@
+{%- import "_macros/snippet" as snippet -%}
+
+<a href="{{ article.url }}" class="blog-item">
+
+  {#
+    Optimzed Images
+    ----
+    optimizedImages(asset, size, mode, alt)
+    mode: box|silhouette|image
+  #}
+  {{ snippet.optimizedImages(article.blogThumbnail.one(), '20vw', 'image', article.title) }}
+
+  <section class="blog-item-infos">
+    <i class="icon-plus"></i>
+    <p class="blog-item-date">{{ article.postDate|date("F jS, Y"|t) }}</p>
+    <h3 class="blog-item-title">{{ article.title }}</h3>
+  </section>
+</a>

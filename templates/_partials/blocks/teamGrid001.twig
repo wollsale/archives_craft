@@ -1,0 +1,32 @@
+{%- import "_macros/snippet" as snippet -%}
+
+{# Team Grid #}
+<section class="site-block block-teamGrid001">
+  <h2 class="big-title">{{ block.heading }}</h2>
+
+  {% cache globally using key 'team-grid' %}
+    <div class="team-grid-cards">
+      {% for team in block.items.all() %}
+
+        <a href="#" class="team-card" data-trigger-team-grid="">
+          {# <img class="team-img" src="/img/site/team-ph.jpg" alt="{{ team }}"> #}
+          {% set image = team.teamImage.one()?? false %}
+
+          {% if image %}
+            {{ snippet.optimizedImages(image, '20vw', 'image', image.title) }}
+          {% endif %}
+
+          <article class="content">
+            <h3 class="team-name">{{ team }}</h3>
+            <h3 class="team-subtitle" >{{ team.teamJobTitle }}</h3>
+            <div class="regular-text">{{ team.teamShortBio| length > 250 ? team.teamShortBio | slice(3, 250) ~ '...' : team.teamShortBio }}</div>
+          </article>
+        </a>
+      {% endfor %}
+    </div>
+  {% endcache %}
+
+  <div class="team-foot-text">
+    {{ block.text }}
+  </div>
+</section>

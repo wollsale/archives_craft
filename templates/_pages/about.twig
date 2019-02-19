@@ -1,0 +1,42 @@
+{# @var craft \craft\web\twig\variables\CraftVariable #}
+
+{%- import "_macros/snippet" as snippet -%}
+
+{% set pageClass = 'about' %}
+{% extends "_layouts/_layout.twig" %}
+
+{% block _inline_css %}
+  <style>
+    {{ source ("about_critical.min.css", ignore_missing = true) }}
+  </style>
+{% endblock %}
+
+{% block content %}
+{% cache globally using key 'about' %}
+
+  {#Hero#}
+  {% set thumb = {
+    mode: 'fit',
+    width: 2000,
+    quality: 75,
+    position: 'center-center'
+  } %}
+  {% set image = '/img/site/blog-hero-default.png' %}
+  {% set vars = {
+    'backgroundImage': image,
+    'title': entry.title,
+  } %}
+  {% include '_partials/hero-banner' with vars %}
+
+  {# Blocks #}
+  {% include '_partials/blocks/_blocks' with { blocks: entry.contentBlocks } %}
+
+  {# Extras #}
+  {% include '_partials/side-panel-form' %}
+  {% include '_partials/side-panel-info' %}
+
+{% endcache %}
+{% endblock %}
+
+{% block _inline_js %}
+{% endblock %}

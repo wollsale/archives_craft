@@ -1,0 +1,143 @@
+.careers-section {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 1520px;
+  padding: 70px 20px;
+
+  @media (max-width: 900px) {
+    padding: 40px 20px;
+  }
+
+  .big-title {
+    margin: 0 0 20px;
+    text-align: center;
+  }
+
+  .careers-intro {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto 40px;
+    text-align: center;
+  }
+
+  .careers-listing {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid #E6E6E6;
+  }
+
+  .careers-item {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #E6E6E6;
+    padding: 30px 20px;
+
+    @media (max-width: 900px) {
+      padding: 20px;
+      flex-wrap: wrap;
+    }
+
+    &:nth-child(even) {
+      background-color: #F0F0F0;
+    }
+  }
+
+  .careers-link {
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    font-size: 16px;
+    color: $colorAccent1;
+    border: 2px solid $colorAccent1;
+    font-weight: 700;
+    transition: all ease-out .2s;
+
+    @media (max-width: 900px) {
+      width: 30px;
+      height: 30px;
+      line-height: 30px;
+      font-size: 12px;
+    }
+
+    &:hover {
+      background-color: $colorAccent1;
+      color: white;
+    }
+  }
+
+  .careers-infos {
+    width: 550px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    @media (max-width: 1180px) {
+      width: 400px;
+    }
+
+    @media (max-width: 1023px) {
+      flex-direction: column;
+      width: 250px;
+    }
+
+    @media (max-width: 900px) {
+      width: auto;
+    }
+
+    & > .careers-type, & > .careers-location {
+      width: 50%;
+      font-size: 14px;
+      line-height: 22px;
+      letter-spacing: .2px;
+      color: #6D6D6D;
+      font-weight: 400;
+      margin: 0;
+
+      @media (max-width: 1023px) {
+        margin: 5px 0;
+        width: 100%;
+      }
+    }
+  }
+
+  .careers-name {
+    flex-grow: 1;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 1px;
+    font-weight: 600;
+    text-transform: uppercase;
+
+    @media (max-width: 900px) {
+      width: 100%;
+      margin: 0 0 20px;
+    }
+  }
+}
+
+.contact-form-wrapper {
+  background-color: #EBEBEB;
+
+  .contact-form {
+    width: 100%;
+    max-width: 1280px;
+    padding: 70px 20px;
+    margin: 0 auto;
+
+    @media(max-width: 700px) {
+      padding: 40px 20px;
+    }
+
+    .big-title {
+      margin-bottom: 80px;
+
+      @media(max-width: 700px) {
+        margin-bottom: 40px;
+      }
+    }
+  }
+}

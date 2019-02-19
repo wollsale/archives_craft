@@ -1,0 +1,21 @@
+{% for block in blocks.all() %}
+
+    {% switch block.type %}
+
+    {% case "intro" %}
+        {% include "_partials/blog/intro" %}
+
+    {% case "text" %}
+        {% include "_partials/blog/text" %}
+
+    {% case "cta" %}
+        {% include "_partials/blog/cta" %}
+
+    {% case "quote" %}
+        {% include "_partials/blog/quote" %}
+
+    {% case "author" %}
+        {% include "_partials/blog/author" %}
+    {% endswitch %}
+
+{% endfor %}

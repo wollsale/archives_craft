@@ -1,0 +1,140 @@
+// --------------------------------------------------
+// Base
+// --------------------------------------------------
+
+* {
+  box-sizing: border-box;
+}
+
+body,
+html {
+  width: 100%;
+  height: auto;
+  font-size: 62.5%;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  font-family: Helvetica, Arial, sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+}
+
+.fonts-loaded body {
+  font-family: $fontText;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: Verdana, Geneva, sans-serif;
+}
+
+.fonts-loaded h1,
+.fonts-loaded h2,
+.fonts-loaded h3,
+.fonts-loaded h4,
+.fonts-loaded h5,
+.fonts-loaded h6, {
+  font-family: $fontTitle;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: #C2C7D0;
+}
+::-moz-placeholder { /* Firefox 19+ */
+  color: #C2C7D0;
+}
+:-ms-input-placeholder { /* IE 10+ */
+  color: #C2C7D0;
+}
+:-moz-placeholder { /* Firefox 18- */
+  color: #C2C7D0;
+}
+
+.hide-for-screen {
+  font-size: 0;
+}
+
+/* -- For screen readers */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+
+/* -- A subtle focus style for keyboard-input elements */
+.text-input:focus {
+    outline: 1px solid #5db7a5; /* Adjust to suit your tastes */
+}
+
+/* -- No outline for non-keyboard-inputs elements */
+button:focus,
+select:focus {
+    outline: none;
+}
+
+html.user-is-tabbing *:focus {
+    outline: 2px solid var(--outlineColor) !important; /* for non-webkit browsers */
+    outline: 5px auto -webkit-focus-ring-color !important;
+}
+
+/* -- Fontello */
+
+.fonts-loaded [class^="icon-"]:before {
+    font-family: "fontello";
+}
+
+.fonts-loaded [class*=" icon-"]:before {
+    font-family: "fontello";
+}
+
+[class^="icon-"]:before, [class*=" icon-"]:before {
+    font-style: normal;
+    font-weight: normal;
+    speak: none;
+
+    display: inline-block;
+    text-decoration: inherit;
+    width: 1em;
+    margin-right: .2em;
+    text-align: center;
+    /* opacity: .8; */
+
+    /* For safety - reset parent styles, that can break glyph codes*/
+    font-variant: normal;
+    text-transform: none;
+
+    /* fix buttons height, for twitter bootstrap */
+    line-height: 1em;
+
+    /* Animation center compensation - margins should be symmetric */
+    /* remove if not needed */
+    margin-left: .2em;
+
+    /* you can be more comfortable with increased icons size */
+    /* font-size: 120%; */
+
+    /* Font smoothing. That was taken from TWBS */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    /* Uncomment for 3D effect */
+    /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
+}
+
+.responsive-img {
+  width: 100%;
+  height: auto;
+}

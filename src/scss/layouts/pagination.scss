@@ -1,0 +1,35 @@
+.pagination {
+  position: relative;
+  width: 100%;
+  text-align: center;
+  padding-top: 50px;
+  font-family: $fontTitle;
+  font-size: 14px;
+  line-height: 14px;
+
+
+  .current {
+    text-align: center;
+    padding: 15px;
+    background-color: $colorAccent2;
+    color: #fff;
+    margin: 0 5px;
+    border-radius: 3px;
+  }
+
+  a {
+    padding: 17px 10px 13px;
+    text-decoration: none;
+    margin: 0 5px;
+    transition: color ease-out .2s;
+
+    &:hover {
+      color: $colorAccent2;
+    }
+
+    i {
+      font-size: 18px;
+      line-height: 18px;
+    }
+  }
+}

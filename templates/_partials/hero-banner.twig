@@ -1,0 +1,14 @@
+<section class="hero-wrapper">
+  <div class="hero-caption {{ class is defined ? class : '' }}" style="background-image:url('{{ backgroundImage }}');">
+    {% if suptitle is defined %}
+      <p class="hero-suptitle">{{ suptitle|nl2br }}</p>
+    {% endif %}
+    <h1 class="hero-title">{{ title }}</h1>
+    {% if subtitle is defined %}
+      <p class="hero-subtitle">{{ subtitle|nl2br }}</p>
+    {% endif %}
+    {% if careers is defined %}
+      <a class="site-btn items-cta bg-white" href="#application-form" data-scroll><span>{{ 'Apply now'|t }}</span></a>
+    {% endif %}
+  </div>
+</section>

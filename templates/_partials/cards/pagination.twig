@@ -1,0 +1,39 @@
+{%- set queryString = craft.request.getQueryStringWithoutPath() -%}
+{%- set queryString = (queryString is not empty) ? "?" ~ queryString : "" -%}
+
+<div class="content-pagination">
+
+    {# Previous #}
+    {%- if pageInfo.prevUrl -%}
+      <a class="content-pagination-prev" href="{{ pageInfo.prevUrl ~ queryString }}">
+        <span></span>
+      </a>
+    {%- else -%}
+      <div class="content-pagination-prev is-disabled">
+        <span class="is-disabled"></span>
+      </div>
+    {%- endif -%}
+
+    {# Numbers #}
+    {%- for page, url in pageInfo.getPrevUrls(3) -%}
+      <a href="{{ url ~ queryString }}">{{ page }}</a>
+    {%- endfor -%}
+
+    <div class="is-current">{{ pageInfo.currentPage }}</div>
+
+    {%- for page, url in pageInfo.getNextUrls(3) -%}
+      <a href="{{ url ~ queryString }}">{{ page }}</a>
+    {%- endfor -%}
+
+    {# Next #}
+    {%- if pageInfo.nextUrl -%}
+      <a class="content-pagination-next" href="{{ pageInfo.nextUrl ~ queryString }}" title="Next page">
+        <span></span>
+      </a>
+    {%- else -%}
+      <div class="content-pagination-next is-disabled">
+        <span class="is-disabled"></span>
+      </div>
+    {%- endif -%}
+
+</div>

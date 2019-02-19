@@ -1,0 +1,28 @@
+<section class="site-block block-partners">
+
+  <section class="partners-cta">
+
+    <section class="partners-container page">
+      {% for group in block.groups %}
+        {% set partners = group.partners %}
+        {% if partners|length %}
+          <h2 class="big-title"><span>{{ group.groupName }}</span></h2>
+          <section class="partners-list {{ group.displaySize }}">
+            {% for partner in partners %}
+              {% if partner.partnerUrl is not empty %}
+                <a href="{{ partner.partnerUrl }}" target="_blank" class="partial-partner">
+                  <img src="{{ partner.partnerLogo.one.url }}" alt="{{ partner.partnerName }}">
+                </a>
+              {% else %}
+                <div class="partial-partner">
+                  <img src="{{ partner.partnerLogo.one.url }}" alt="{{ partner.partnerName }}">
+                </div>
+              {% endif %}
+            {% endfor %}
+          </section>
+        {% endif %}
+      {% endfor %}
+    </section>
+  </section>
+
+</section>

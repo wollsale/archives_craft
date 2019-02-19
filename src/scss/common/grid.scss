@@ -1,0 +1,124 @@
+// --------------------------------------------------
+// Main Grid Components
+// --------------------------------------------------
+.site-container {
+  position: relative;
+  overflow: hidden;
+  padding-top: 123px;
+
+  @media only screen and (max-width: 1400px) {
+    padding-top: 116;
+  }
+
+  @media only screen and (max-width: 1299px) {
+    padding-top: 96px;
+  }
+
+  @media only screen and (max-width: 1100px) {
+    padding-top: 70px;
+  }
+}
+
+.site-grid {
+  position: relative;
+  overflow: hidden;
+}
+
+.site-max-width {
+  position: relative;
+  width: 100%;
+  max-width: calc(1280px + (75px * 2));
+  margin: 0 auto;
+  padding-left: 75px;
+  padding-right: 75px;
+
+  @media only screen and (max-width: 1349px) {
+    // padding: 75px 45px;
+    padding-left: 45px;
+    padding-right: 45px;
+  }
+
+  @media only screen and (max-width: 1099px) {
+    // padding: 75px 25px;
+    padding-left: 25px;
+    padding-right: 25px;
+  }
+
+  @media only screen and (max-width: 767px) {
+    // padding: 25px 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+
+.main-content {
+  width: 100%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//
+//
+// DEPRECATED
+//
+//
+.main-aside {
+
+}
+
+.has-aside .main {
+  position: relative;
+  width: 100%;
+  padding-left: 300px;
+  -webkit-transition: all .35s ease;
+  transition: all .35s ease;
+
+  & > section {
+    border-left: 1px solid $lighter;
+  }
+
+  @media screen and (max-width: 1204px) {
+    padding-left: 0;
+
+    & > section {
+      border-left: none;
+    }
+  }
+}
+
+@media screen and (max-width: 1204px) {
+  .main-aside.show + .main {
+    -webkit-transform: translate(300px);
+    -ms-transform: translate(300px);
+    transform: translate(300px);
+  }
+}
+
+
+
+// --------------------------------------------------
+// With Aside
+// --------------------------------------------------
+.has-aside {
+
+}
+
+.is-aside-active {
+
+}
